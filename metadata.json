@@ -1,0 +1,6 @@
+{
+  "name": "Veloce",
+  "description": "Nigerian digital banking, instant NIBSS NIP peer transfers, NUBAN wallets, high-yield Naira savings vaults, and RBAC account governance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
