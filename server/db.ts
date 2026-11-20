@@ -11,11 +11,16 @@ import {
   UserRole,
 } from '../src/types.ts';
 
-const dbPath = path.resolve(process.cwd(), process.env.DB_PATH || './data/veloce.db');
+const defaultDbPath = process.env.VERCEL ? '/tmp/veloce.db' : './data/veloce.db';
+const dbPath = path.resolve(process.cwd(), process.env.DB_PATH || defaultDbPath);
 fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 
 export const db = new Database(dbPath);
-db.pragma('journal_mode = WAL');
+try {
+  db.pragma('journal_mode = WAL');
+} catch {
+  // Fallback cleanly if container filesystem restricts WAL mode
+}
 db.pragma('foreign_keys = ON');
 db.pragma('busy_timeout = 5000');
 
